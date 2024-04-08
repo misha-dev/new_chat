@@ -1,11 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Chat } from '../Components/Chat/Chat';
-import { Layout } from '../Components/Layout/Layout';
-import { Loader } from '../Components/Loaders/LoaderMain/Loader';
-import { Login } from '../pages/Login/Login';
-import { useAuth } from '../hooks/useAuth';
-import { useFirebaseContext } from '../hooks/useFirebaseContext';
+import { useAuth } from '../entities/user/model/useAuth';
+import { useFirebaseContext } from '../shared/firebase/useFirebaseContext';
 import './App.css';
 
 export const AppRouter = () => {
