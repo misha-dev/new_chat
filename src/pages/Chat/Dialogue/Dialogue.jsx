@@ -16,7 +16,7 @@ export const Dialogue = ({ userCurrent, userActiveDialogue }) => {
   const toScroll = messages?.length > 1;
 
   useScrollbar(messagesForScrollbar, toScroll);
-  // Solved problem with rendering of message from another user
+
   useEffect(() => {
     scrollBars?.scroll([0, '100%'], 70);
   });
@@ -32,8 +32,8 @@ export const Dialogue = ({ userCurrent, userActiveDialogue }) => {
         ) : (
           <div ref={messagesForScrollbar} className={cl.messageWrapperForScroll}>
             <div ref={innerBlockForScroll}>
-              {messages.map((message) => {
-                return <Message key={message.uid} message={message} uid={message.uid} userCurrent={userCurrent} userActiveDialogue={userActiveDialogue} />;
+              {messages.map((message, id) => {
+                return <Message key={id} message={message} uid={message.uid} userCurrent={userCurrent} userActiveDialogue={userActiveDialogue} />;
               })}
             </div>
           </div>

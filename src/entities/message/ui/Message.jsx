@@ -3,6 +3,7 @@ import cl from './Message.module.css';
 
 export const Message = ({ userCurrent, uid, userActiveDialogue, message }) => {
   const currentUserMessage = userCurrent.uid === uid;
+  const messageContent = message.message;
 
   const dateCreation = toDateTime(message.createdAt.toDate());
 
@@ -11,7 +12,7 @@ export const Message = ({ userCurrent, uid, userActiveDialogue, message }) => {
       {currentUserMessage ? (
         <>
           <div className={`${cl.message} ${cl.messageRight}`}>
-            {message}
+            {messageContent}
             <div className={`${cl.dateCreation} ${cl.dateCreationRight}`}>{dateCreation}</div>
           </div>
           <img style={{ marginLeft: '5px' }} src={userCurrent.photoURL} alt="avatar" />
@@ -20,7 +21,7 @@ export const Message = ({ userCurrent, uid, userActiveDialogue, message }) => {
         <>
           <img style={{ marginRight: '5px' }} src={userActiveDialogue.photoURL} alt="avatar" />
           <div className={`${cl.message} ${cl.messageLeft}`}>
-            {message}
+            {messageContent}
             <div className={`${cl.dateCreation} ${cl.dateCreationLeft}`}>{dateCreation}</div>
           </div>
         </>
