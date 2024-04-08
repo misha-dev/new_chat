@@ -3,11 +3,9 @@ import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { IoMdSend } from 'react-icons/io';
 
-import { firestore } from '../../../../firebase/config';
-import { scrollBars } from '../../../../hooks/useScrollbar';
-
-import { hashDialogueId } from '../../../../shared/utils/hashDialogueId';
-
+import { firestore } from '@/shared/firebase/config';
+import { hashDialogueId } from '@/shared/utils/hashDialogueId';
+import { scrollBars } from '@/shared/utils/useScrollbar';
 import cl from './SendMessage.module.css';
 
 export const SendMessage = ({ userCurrent, userActiveDialogue }) => {

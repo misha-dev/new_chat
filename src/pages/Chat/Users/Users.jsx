@@ -1,10 +1,8 @@
 import { useRef } from 'react';
 
-import { useScrollbar } from '../../../hooks/useScrollbar';
-import { LoaderUsers } from '../../Loaders/LoaderUsers/LoaderUsers';
-
-import { useGetFriends } from '../../../entities/user/model/useGetFriends';
-
+import { useGetFriends } from '@/entities/user/model/useGetFriends';
+import { LoaderUsers } from '@/shared/components/Loaders/LoaderUsers/LoaderUsers';
+import { useScrollbar } from '@/shared/utils/useScrollbar';
 import cl from './Users.module.css';
 
 export const Users = ({ userCurrent, setUserActiveDialogue }) => {

@@ -1,4 +1,4 @@
-import { auth, firebase, firestore } from '../../../shared/firebase/config';
+import { auth, firebase, firestore } from '@/shared/firebase/config';
 
 export const loginUser = async () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();

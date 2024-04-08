@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { firestore } from '../../firebase/config';
-import { useAuth } from '../../hooks/useAuth';
-
+import { useAuth } from '@/entities/user/model/useAuth';
+import { firestore } from '@/shared/firebase/config';
 import { BlankDialogue } from './BlankDialogue/BlankDialogue';
 import cl from './Chat.module.css';
 import { Dialogue } from './Dialogue/Dialogue';

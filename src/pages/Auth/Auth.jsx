@@ -1,10 +1,9 @@
 import { FcGoogle } from 'react-icons/fc';
 
-import { loginUser } from '../../entities/user/model/loginUser';
+import { loginUser } from '@/entities/user/model/loginUser';
+import cl from './Auth.module.css';
 
-import cl from './Login.module.css';
-
-export const Login = () => {
+export const Auth = () => {
   return (
     <div className={cl.loginWrapper}>
       <div onClick={loginUser} className={cl.login}>

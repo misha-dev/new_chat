@@ -1,17 +1,12 @@
 import { useEffect, useRef } from 'react';
 
-import { scrollBars, useScrollbar } from '../../../hooks/useScrollbar';
-import { LoaderMessages } from '../../Loaders/LoaderMessages/LoaderMessages';
-
-import { Message } from '../../../entities/message/ui/Message';
-
-import { useGetMessages } from '../../../entities/message/model/useGetMessages';
-
-import { EmptyDialogue } from './EmptyDialogue/EmptyDialogue';
-
-import { SendMessage } from './SendMessage/SendMessage';
-
+import { useGetMessages } from '@/entities/message/model/useGetMessages';
+import { Message } from '@/entities/message/ui/Message';
+import { LoaderMessages } from '@/shared/components/Loaders/LoaderMessages/LoaderMessages';
+import { scrollBars, useScrollbar } from '@/shared/utils/useScrollbar';
 import cl from './Dialogue.module.css';
+import { EmptyDialogue } from './EmptyDialogue/EmptyDialogue';
+import { SendMessage } from './SendMessage/SendMessage';
 
 export const Dialogue = ({ userCurrent, userActiveDialogue }) => {
   const messagesForScrollbar = useRef(null);
@@ -37,7 +32,7 @@ export const Dialogue = ({ userCurrent, userActiveDialogue }) => {
         ) : (
           <div ref={messagesForScrollbar} className={cl.messageWrapperForScroll}>
             <div ref={innerBlockForScroll}>
-              {messages.map((message, index) => {
+              {messages.map((message) => {
                 return <Message key={message.uid} message={message} uid={message.uid} userCurrent={userCurrent} userActiveDialogue={userActiveDialogue} />;
               })}
             </div>

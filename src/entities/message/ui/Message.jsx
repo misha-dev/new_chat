@@ -1,5 +1,4 @@
-import { toDateTime } from '../../../shared/utils/toDateTime';
-
+import { toDateTime } from '@/shared/utils/toDateTime';
 import cl from './Message.module.css';
 
 export const Message = ({ userCurrent, uid, userActiveDialogue, message }) => {
