@@ -1,0 +1,18 @@
+.blankWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.blankWrapper p {
+  margin-top: 5px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.chatIcon {
+  font-size: 3rem;
+  color: #3891fc;
+}

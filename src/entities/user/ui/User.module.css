@@ -1,0 +1,53 @@
+.user {
+  position: relative;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.user img {
+  position: relative;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.user img::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: url("../../images/userPreview.png") no-repeat center center/cover;
+}
+
+.userOptions {
+  position: absolute;
+  left: 0;
+  top: 51.5px;
+  z-index: 1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 1px black;
+  background-color: white;
+  transform: translateX(-20px);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 5px;
+  transition: box-shadow 0.2s linear;
+  cursor: pointer;
+}
+
+.option:hover {
+  box-shadow: inset 0 0 2px #3891fc;
+}
+
+.active {
+  display: flex;
+}

@@ -1,0 +1,114 @@
+.usersWrapper {
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid rgb(228 233 237);
+  width: 18vw;
+  height: 100%;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.userCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 15px 15px 20px;
+  transition:
+    box-shadow 0.2s linear,
+    background-color 0.2s linear,
+    color 0.2s linear;
+  cursor: pointer;
+}
+
+.userCard:hover {
+  box-shadow: inset 0 0 1.5px black;
+}
+
+.userCard:not(.userCard:last-child) {
+  border-bottom: 0.2px solid rgb(108 122 137 / 70%);
+}
+
+.wrapperImg {
+  position: relative;
+  overflow: hidden;
+  margin-right: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.userCard img {
+  position: relative;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+.userCard img::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background:
+    url("../../../images/userPreview.png") no-repeat center
+    center/cover;
+}
+
+.userName {
+  width: 156px;
+  font-size: 1.2rem;
+}
+
+input[type="radio"]:checked + div {
+  color: white;
+  background-color: #2f70d2;
+}
+
+.online {
+  position: absolute;
+  left: 60%;
+  top: 68%;
+  border: 0.5px solid #00399b;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  transition: background-color 0.2s linear;
+}
+
+@media (max-width: 1350px) {
+  .usersWrapper {
+    width: 14vw;
+  }
+
+  .userCard {
+    padding: 5px 5px 5px 10px;
+  }
+
+  .wrapperImg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .userName {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .wrapperImg {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media (max-width: 500px) {
+  .online {
+    width: 7px;
+    height: 7px;
+  }
+}

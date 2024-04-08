@@ -1,0 +1,31 @@
+.loginWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 65px);
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #3891fc;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 1.6rem;
+  transition: background-color 0.2s linear;
+  cursor: pointer;
+}
+
+.login:hover {
+  color: whitesmoke;
+  background-color: #3891fc;
+}
+
+.googleIcon {
+  font-size: 1.8rem;
+}
+
+.login p {
+  margin-right: 5px;
+}

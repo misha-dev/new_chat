@@ -1,0 +1,17 @@
+.chatWrapper {
+  display: flex;
+  height: 100%;
+}
+
+.dialogueArea {
+  padding: 30px 40px;
+  width: 82vw;
+  height: 100%;
+}
+
+@media (max-width: 1350px) {
+  .dialogueArea {
+    padding: 15px 20px;
+    width: 86vw;
+  }
+}

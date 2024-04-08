@@ -1,0 +1,76 @@
+.messageWrapper {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  color: white;
+}
+
+.messageWrapper img {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 31px;
+  height: 31px;
+}
+
+.messageWrapper img::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background:
+    url("../../../../images//userPreview.png") no-repeat center
+    center/cover;
+}
+
+.message {
+  position: relative;
+  border-radius: 35px;
+  padding: 10px 15px;
+  max-width: 80%;
+  line-height: 1.15rem;
+}
+
+.messageRight {
+  background-color: #3891fc;
+}
+
+.messageLeft {
+  background-color: #2f70d2;
+}
+
+.dateCreation {
+  position: absolute;
+  top: calc(100% + 3.5px);
+  width: 120px;
+  font-size: 0.57rem;
+  line-height: 0.57rem;
+  color: grey;
+}
+
+.dateCreationRight {
+  left: 100%;
+  transform: translateX(-55%);
+}
+
+.dateCreationLeft {
+  left: 3px;
+}
+
+@media (max-width: 1350px) {
+  .messageWrapper img {
+    display: none;
+  }
+
+  .messageWrapper {
+    padding-left: 5px;
+  }
+
+  .message {
+    font-size: 0.9rem;
+    line-height: 1rem;
+  }
+}

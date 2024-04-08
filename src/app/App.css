@@ -1,0 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+
+body {
+  font-family: Roboto, sans-serif;
+  background-color: whitesmoke;
+}
+
+.App .os-theme-dark .os-scrollbar-vertical > .os-scrollbar-track > .os-scrollbar-handle {
+  background-color: rgb(47 112 210 / 60%) !important;
+}
+
+.App .os-theme-dark .os-scrollbar-vertical > .os-scrollbar-track > .os-scrollbar-handle.active {
+  background-color: rgb(47 112 210 / 100%) !important;
+}
