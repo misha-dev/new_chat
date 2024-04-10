@@ -4,7 +4,6 @@ import { IoMdSend } from 'react-icons/io';
 
 import { firestore } from '@/shared/firebase/config';
 import { hashDialogueId } from '@/shared/utils/hashDialogueId';
-import { scrollBars } from '@/shared/utils/useScrollbar';
 import cl from './SendMessage.module.css';
 
 export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
@@ -47,13 +46,6 @@ export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
   return (
     <div className={cl.sendMessageWrapper}>
       <textarea
-        onFocus={() => {
-          if (isMobile) {
-            setTimeout(() => {
-              scrollBars?.scroll([0, '100%'], 70);
-            }, 500);
-          }
-        }}
         ref={inputMessageArea}
         autoComplete="off"
         value={message}
