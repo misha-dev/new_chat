@@ -1,21 +1,14 @@
-import { useRef } from 'react';
-
 import { useGetFriends } from '@/entities/user/model/useGetFriends';
 import { LoaderUsers } from '@/shared/components/Loaders/LoaderUsers/LoaderUsers';
-import { useScrollbar } from '@/shared/utils/useScrollbar';
 import cl from './Users.module.css';
 
 export const Users = ({ userCurrent, setUserActiveDialogue }) => {
   const [users] = useGetFriends(userCurrent);
 
-  const listOfUsersToScroll = useRef();
-  useScrollbar(listOfUsersToScroll, users?.length > 1);
-
   return (
-    <div ref={listOfUsersToScroll} className={cl.usersWrapper}>
+    <div className={cl.usersWrapper}>
       {users ? (
-        // for scroll to work correctly
-        <div>
+        <>
           {users.map((user) => {
             return (
               <label key={user.uid}>
@@ -44,7 +37,7 @@ export const Users = ({ userCurrent, setUserActiveDialogue }) => {
               </label>
             );
           })}
-        </div>
+        </>
       ) : (
         <LoaderUsers />
       )}

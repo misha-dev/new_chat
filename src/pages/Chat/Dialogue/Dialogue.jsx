@@ -1,20 +1,13 @@
-import { useRef } from 'react';
-
 import { useGetMessages } from '@/entities/message/model/useGetMessages';
 import { Message } from '@/entities/message/ui/Message';
 import { LoaderMessages } from '@/shared/components/Loaders/LoaderMessages/LoaderMessages';
-import { useScrollbar } from '@/shared/utils/useScrollbar';
+
 import cl from './Dialogue.module.css';
 import { EmptyDialogue } from './EmptyDialogue/EmptyDialogue';
 import { SendMessage } from './SendMessage/SendMessage';
 
 export const Dialogue = ({ userCurrent, userActiveDialogue }) => {
-  const messagesForScrollbar = useRef(null);
   const [messages, messagesLoading] = useGetMessages(userCurrent, userActiveDialogue);
-
-  const toScroll = messages?.length > 1;
-
-  useScrollbar(messagesForScrollbar, toScroll);
 
   return (
     <div className={cl.dialogueWrapper}>
