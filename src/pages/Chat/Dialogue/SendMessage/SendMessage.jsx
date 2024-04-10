@@ -1,4 +1,3 @@
-import firebase from 'firebase';
 import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { IoMdSend } from 'react-icons/io';
@@ -25,7 +24,7 @@ export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
       displayName: userCurrent.displayName,
       photoURL: userCurrent.photoURL,
       message: message.trim(),
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      createdAt: new Date(),
     });
 
     inputMessageArea?.current?.focus();
