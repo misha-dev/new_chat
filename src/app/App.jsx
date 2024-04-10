@@ -1,4 +1,3 @@
-import 'overlayscrollbars/styles/overlayscrollbars.css';
 import './App.css';
 
 import { AppFirebaseContext } from './AppFirebaseContext';
