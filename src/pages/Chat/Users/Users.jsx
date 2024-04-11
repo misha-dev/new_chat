@@ -2,6 +2,7 @@ import { useGetFriends } from '@/entities/user/model/useGetFriends';
 import { LoaderUsers } from '@/shared/components/Loaders/LoaderUsers/LoaderUsers';
 import { SearchInput } from '@/shared/components/SearchInput/SearchInput';
 import { useCallback, useState } from 'react';
+import { FaPlus } from 'react-icons/fa';
 import cl from './Users.module.css';
 
 export const Users = ({ userCurrent, setUserActiveDialogue }) => {
@@ -14,7 +15,12 @@ export const Users = ({ userCurrent, setUserActiveDialogue }) => {
 
   return (
     <div className={cl.usersWrapper}>
-      <SearchInput containerClassName={cl.search} input={searchInput} setInput={setSearchInput} onChangeSideEffect={onChangeSearchInputSideEffect} />
+      <div className={cl.chatOptions}>
+        <SearchInput containerClassName={cl.search} input={searchInput} setInput={setSearchInput} onChangeSideEffect={onChangeSearchInputSideEffect} />
+        <button className={cl.addChat}>
+          <FaPlus  />
+        </button>
+      </div>
       {users ? (
         <div className={cl.usersList}>
           {users.map((user) => {
