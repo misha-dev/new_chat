@@ -2,14 +2,16 @@
   display: flex;
   gap: 5px;
   align-items: center;
-  padding: 5px;
-  width: 100%;
+  padding-inline: 5px;
   border-radius: 25px;
   background-color: #fff;
-
+  border: 1px solid rgba(56, 145, 252, 0.5);
 }
 
 .searchInput {
+  padding-block: 10px;
   font-size: 1rem;
   background-color: transparent;
+  height: 100%;
+  width: 100%;
 }

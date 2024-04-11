@@ -14,7 +14,7 @@ export const Users = ({ userCurrent, setUserActiveDialogue }) => {
 
   return (
     <div className={cl.usersWrapper}>
-      <SearchInput input={searchInput} setInput={setSearchInput} onChangeSideEffect={onChangeSearchInputSideEffect} />
+      <SearchInput containerClassName={cl.search} input={searchInput} setInput={setSearchInput} onChangeSideEffect={onChangeSearchInputSideEffect} />
       {users ? (
         <div className={cl.usersList}>
           {users.map((user) => {

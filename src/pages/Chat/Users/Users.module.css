@@ -6,6 +6,10 @@
   height: 100%;
 }
 
+.search {
+  margin: 10px;
+}
+
 .usersList {
   flex: 1;
 }
@@ -17,7 +21,6 @@ input[type='radio'] {
 .userCard {
   display: flex;
   align-items: center;
-  justify-content: center;
   padding: 15px 15px 15px 20px;
   transition: box-shadow 0.2s linear, background-color 0.2s linear, color 0.2s linear;
   cursor: pointer;
@@ -59,7 +62,6 @@ input[type='radio'] {
 }
 
 .userName {
-  width: 156px;
   font-size: 1.2rem;
 }
 
