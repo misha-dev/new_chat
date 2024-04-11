@@ -3,6 +3,11 @@
   flex-direction: column;
   border-right: 2px solid rgb(228 233 237);
   width: 18vw;
+  height: 100%;
+}
+
+.usersList {
+  flex: 1;
 }
 
 input[type='radio'] {

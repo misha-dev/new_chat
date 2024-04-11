@@ -1,0 +1,15 @@
+.searchContainer {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 5px;
+  width: 100%;
+  border-radius: 25px;
+  background-color: #fff;
+
+}
+
+.searchInput {
+  font-size: 1rem;
+  background-color: transparent;
+}

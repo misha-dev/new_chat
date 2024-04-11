@@ -1,14 +1,22 @@
 import { useGetFriends } from '@/entities/user/model/useGetFriends';
 import { LoaderUsers } from '@/shared/components/Loaders/LoaderUsers/LoaderUsers';
+import { SearchInput } from '@/shared/components/SearchInput/SearchInput';
+import { useCallback, useState } from 'react';
 import cl from './Users.module.css';
 
 export const Users = ({ userCurrent, setUserActiveDialogue }) => {
   const [users] = useGetFriends(userCurrent);
+  const [searchInput, setSearchInput] = useState('');
+
+  const onChangeSearchInputSideEffect = useCallback(() => {
+    console.log('ddd');
+  }, []);
 
   return (
     <div className={cl.usersWrapper}>
+      <SearchInput input={searchInput} setInput={setSearchInput} onChangeSideEffect={onChangeSearchInputSideEffect} />
       {users ? (
-        <>
+        <div className={cl.usersList}>
           {users.map((user) => {
             return (
               <label key={user.uid}>
@@ -37,7 +45,7 @@ export const Users = ({ userCurrent, setUserActiveDialogue }) => {
               </label>
             );
           })}
-        </>
+        </div>
       ) : (
         <LoaderUsers />
       )}
