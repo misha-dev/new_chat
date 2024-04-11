@@ -10,8 +10,6 @@
 .messagesWrapper {
   display: flex;
   flex-direction: column;
-  overflow: auto;
-  overflow-x: hidden;
   margin-bottom: 8px;
   border: 1px solid rgb(56 145 252 / 30%);
   border-radius: 20px;
@@ -30,6 +28,8 @@
 .messageWrapperForScroll {
   padding: 8px;
   height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 .messageWrapperForScroll > :last-child {
