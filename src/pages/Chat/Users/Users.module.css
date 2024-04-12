@@ -9,24 +9,8 @@
 .chatOptions {
   display: flex;
   align-items: center;
-  margin: 5px; 
+  margin: 5px;
   gap: 7px;
-}
-
-.addChat {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border-radius: 5px;
-  background-color: #3891fc;
-  color: #fff;
-  padding: 5px;
-}
-
-.addChat svg {
-  width: 15px;
-  height: 15px;
 }
 
 .search {

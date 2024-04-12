@@ -1,0 +1,38 @@
+.modalWrapper {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  position: relative;
+  background-color: #fff;
+  border-radius: 20px;
+  width: 400px;
+  padding: 5px;
+}
+
+.buttonClose {
+  background: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-60%, 20%);
+}
+
+.buttonClose svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.header {
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.body {
+}
