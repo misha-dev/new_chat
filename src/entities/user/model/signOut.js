@@ -1,6 +1,8 @@
-import { auth, firestore } from '../../../shared/firebase/config';
+import { signOut as signOutGoogle } from 'firebase/auth';
+import { auth } from '../../../shared/firebase/config';
+import { setUserOnline } from './setUserOnline';
 
-export const signOut = (user) => {
-  auth.signOut();
-  firestore.collection('users').doc(user.uid).update({ online: false });
+export const signOut = async (user) => {
+  await signOutGoogle(auth);
+  await setUserOnline(user.uid, false);
 };

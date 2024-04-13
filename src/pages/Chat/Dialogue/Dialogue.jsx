@@ -9,6 +9,7 @@ import { SendMessage } from './SendMessage/SendMessage';
 
 export const Dialogue = ({ userCurrent, userActiveDialogue }) => {
   const [messages, messagesLoading] = useGetMessages(userCurrent, userActiveDialogue);
+  console.log(messages);
 
   const endRef = useRef();
 

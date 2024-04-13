@@ -1,4 +1,4 @@
-import { useGetFriends } from '@/entities/user/model/useGetFriends';
+import { useGetUsers } from '@/entities/user/model/useGetUsers';
 import { CreateChatButton } from '@/features/chat';
 import { LoaderUsers } from '@/shared/components/Loaders/LoaderUsers/LoaderUsers';
 import { SearchInput } from '@/shared/components/SearchInput/SearchInput';
@@ -6,7 +6,7 @@ import { useCallback, useState } from 'react';
 import cl from './Users.module.css';
 
 export const Users = ({ userCurrent, setUserActiveDialogue }) => {
-  const [users] = useGetFriends(userCurrent);
+  const [users] = useGetUsers(userCurrent);
   const [searchInput, setSearchInput] = useState('');
 
   const onChangeSearchInputSideEffect = useCallback(() => {

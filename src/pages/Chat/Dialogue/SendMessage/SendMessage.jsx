@@ -6,6 +6,7 @@ import { firestore } from '@/shared/firebase/config';
 import { hashDialogueId } from '@/shared/utils/hashDialogueId';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
+import { addDoc, collection } from 'firebase/firestore';
 import { MdEmojiEmotions } from 'react-icons/md';
 import cl from './SendMessage.module.css';
 
@@ -28,13 +29,13 @@ export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
     inputMessageArea.current.selectionEnd = currentCursorPosition;
   }, [currentCursorPosition]);
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (message.trim() === '') {
       setMessage('');
       return;
     }
 
-    firestore.collection('messages').add({
+    await addDoc(collection(firestore, 'messages'), {
       access: hashDialogueId(userCurrent.uid, userActiveDialogue.uid),
       uid: userCurrent.uid,
       toUser: userActiveDialogue.uid,
