@@ -1,10 +1,13 @@
-import { auth, firebase, firestore } from '@/shared/firebase/config';
+import { auth, firestore } from '@/shared/firebase/config';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 
 export const loginUser = async () => {
-  const googleProvider = new firebase.auth.GoogleAuthProvider();
-  const { user } = await auth.signInWithPopup(googleProvider);
+  const googleProvider = new GoogleAuthProvider();
 
-  firestore.collection('users').doc(user.uid).set({
+  const { user } = await signInWithPopup(auth, googleProvider);
+
+  await setDoc(doc(firestore, 'users', user.uid), {
     uid: user.uid,
     displayName: user.displayName,
     email: user.email,

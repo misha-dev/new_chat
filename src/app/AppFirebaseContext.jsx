@@ -1,14 +1,18 @@
 import { auth } from '@/shared/firebase/config';
 import { FirebaseContext } from '@/shared/firebase/context';
+import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 
 export const AppFirebaseContext = ({ children }) => {
-  const [logged, setLogged] = useState(false);
+  const [currentUser, setCurrentUser] = useState(false);
   useEffect(() => {
-    const unsub = auth.onAuthStateChanged(() => {
-      setLogged(true);
-      unsub();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
     });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
-  return <FirebaseContext.Provider value={{ logged }}>{children}</FirebaseContext.Provider>;
+  return <FirebaseContext.Provider value={{ currentUser }}>{children}</FirebaseContext.Provider>;
 };
