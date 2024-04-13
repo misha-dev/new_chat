@@ -76,10 +76,19 @@ body {
   background-color: whitesmoke;
 }
 
-.App .os-theme-dark .os-scrollbar-vertical > .os-scrollbar-track > .os-scrollbar-handle {
-  background-color: rgb(47 112 210 / 60%) !important;
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-.App .os-theme-dark .os-scrollbar-vertical > .os-scrollbar-track > .os-scrollbar-handle.active {
-  background-color: rgb(47 112 210 / 100%) !important;
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(47 112 210 / 60%);
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(47 112 210 / 100%);
 }

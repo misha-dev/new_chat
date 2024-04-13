@@ -6,6 +6,7 @@ import cl from './CreateChatModal.module.css';
 
 export const CreateChatModal = ({ isOpen, onClose }) => {
   const [inputUserName, setInputUserName] = useState('');
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <Modal.Header>

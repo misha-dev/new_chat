@@ -32,6 +32,14 @@
   overflow-x: hidden;
 }
 
+
+
+
+.messageWrapperForScroll::-webkit-scrollbar-track {
+  margin-bottom: 15px;
+}
+
+
 .messageWrapperForScroll > :last-child {
   padding-bottom: 30px;
 }
