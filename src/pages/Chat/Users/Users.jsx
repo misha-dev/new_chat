@@ -1,4 +1,4 @@
-import { useGetChats } from '@/entities/userchat/model/useGetUserChats';
+import { useGetUserChats } from '@/entities/userchat/model/useGetUserChats';
 import { CreateChatButton } from '@/features/chat';
 import { LoaderUsers } from '@/shared/components/Loaders/LoaderUsers/LoaderUsers';
 import { SearchInput } from '@/shared/components/SearchInput/SearchInput';
@@ -8,9 +8,7 @@ import { useCallback } from 'react';
 import cl from './Users.module.css';
 
 export const Users = ({ userCurrent, setUserActiveDialogue }) => {
-  const [userchats, loading, error] = useGetChats(userCurrent);
-
-  console.log(userchats, loading, error);
+  const [userchats, loading, error] = useGetUserChats(userCurrent);
 
   if (!userchats && !loading && !error) {
     setDoc(doc(firestore, 'userchats', userCurrent.uid), {
@@ -30,7 +28,7 @@ export const Users = ({ userCurrent, setUserActiveDialogue }) => {
       </div>
       {loading ? (
         <LoaderUsers />
-      ) : userchats.chats.length !== 0 ? (
+      ) : userchats.length !== 0 ? (
         <div className={cl.usersList}>
           {userchats.map((user) => {
             return (
