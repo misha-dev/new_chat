@@ -19,6 +19,17 @@
 
 .usersList {
   flex: 1;
+  overflow-y: auto;
+}
+
+.noChats {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #00399b;
+  font-weight: 500;
+  font-size: 1.3rem;
 }
 
 input[type='radio'] {

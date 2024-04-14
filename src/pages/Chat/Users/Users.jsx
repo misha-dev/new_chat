@@ -1,13 +1,22 @@
-import { useGetUsers } from '@/entities/user/model/useGetUsers';
+import { useGetChats } from '@/entities/userchat/model/useGetUserChats';
 import { CreateChatButton } from '@/features/chat';
 import { LoaderUsers } from '@/shared/components/Loaders/LoaderUsers/LoaderUsers';
 import { SearchInput } from '@/shared/components/SearchInput/SearchInput';
-import { useCallback, useState } from 'react';
+import { firestore } from '@/shared/firebase/config';
+import { doc, setDoc } from 'firebase/firestore';
+import { useCallback } from 'react';
 import cl from './Users.module.css';
 
 export const Users = ({ userCurrent, setUserActiveDialogue }) => {
-  const [users] = useGetUsers(userCurrent);
-  const [searchInput, setSearchInput] = useState('');
+  const [userchats, loading, error] = useGetChats(userCurrent);
+
+  console.log(userchats, loading, error);
+
+  if (!userchats && !loading && !error) {
+    setDoc(doc(firestore, 'userchats', userCurrent.uid), {
+      chats: [],
+    });
+  }
 
   const onChangeSearchInputSideEffect = useCallback(() => {
     console.log('ddd');
@@ -16,12 +25,14 @@ export const Users = ({ userCurrent, setUserActiveDialogue }) => {
   return (
     <div className={cl.usersWrapper}>
       <div className={cl.chatOptions}>
-        <SearchInput containerClassName={cl.search} input={searchInput} setInput={setSearchInput} onChangeSideEffect={onChangeSearchInputSideEffect} />
+        <SearchInput containerClassName={cl.search} onChangeSideEffect={onChangeSearchInputSideEffect} />
         <CreateChatButton />
       </div>
-      {users ? (
+      {loading ? (
+        <LoaderUsers />
+      ) : userchats.chats.length !== 0 ? (
         <div className={cl.usersList}>
-          {users.map((user) => {
+          {userchats.map((user) => {
             return (
               <label key={user.uid}>
                 <input
@@ -51,7 +62,7 @@ export const Users = ({ userCurrent, setUserActiveDialogue }) => {
           })}
         </div>
       ) : (
-        <LoaderUsers />
+        <p className={cl.noChats}>No chats!</p>
       )}
     </div>
   );
