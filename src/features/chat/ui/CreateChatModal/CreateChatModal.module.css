@@ -15,11 +15,8 @@
   font-size: 1.2rem;
 }
 
-.searchedUserList {
-  margin-top: 20px;
-}
-
 .userCard {
+  margin-top: 20px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -48,7 +45,7 @@
 }
 
 .createChatButton {
-    padding: 10px;
-    margin-left: auto;
-    font-size: 1rem;
+  padding: 10px;
+  margin-left: auto;
+  font-size: 1rem;
 }
