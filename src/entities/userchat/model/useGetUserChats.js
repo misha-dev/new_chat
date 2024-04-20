@@ -19,16 +19,16 @@ export const useGetUserChats = (userCurrent) => {
             const userDocSnap = await getDoc(userDocRef);
 
             const user = userDocSnap.data();
-
             return { ...item, user };
           });
 
           const chatData = await Promise.all(promises);
 
           setChats(chatData.sort((a, b) => b.updatedAt - a.updatedAt));
-          setIsLoading(false);
         } catch (e) {
           setError(e);
+        } finally {
+          setIsLoading(false);
         }
       },
       (error) => {

@@ -2,19 +2,28 @@ import { ButtonPrimary } from '@/shared/components/ButtonPrimary/ButtonPrimary';
 import { CustomInput } from '@/shared/components/CustomInput/CustomInput';
 import { Modal } from '@/shared/components/Modal/Modal';
 import { firestore } from '@/shared/firebase/config';
-import { collection, query, where } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useState } from 'react';
 import cl from './CreateChatModal.module.css';
 
 export const CreateChatModal = ({ isOpen, onClose }) => {
   const [inputUserName, setInputUserName] = useState('');
-  const [searchedUsers, SetsearchedUsers] = useState(null);
+  const [searchedUser, setSearchedUser] = useState(null);
 
   const onSearchButtonClick = async (e) => {
     e.preventDefault();
     if (inputUserName.trim().length > 0) {
       const q = query(collection(firestore, 'users'), where('displayName', '>=', inputUserName));
-      // const querySnapShot = await  
+      const docsSnapshot = await getDocs(q);
+      console.log(docsSnapshot.docs);
+      if (!docsSnapshot.empty) {
+        const userBestMatch = docsSnapshot.docs.find((doc) => doc.data().displayName.toLowerCase().includes(inputUserName.toLocaleLowerCase()));
+        if (userBestMatch) {
+          setSearchedUser(userBestMatch.data());
+        } else {
+          setSearchedUser(null);
+        }
+      }
     }
   };
 
@@ -32,14 +41,14 @@ export const CreateChatModal = ({ isOpen, onClose }) => {
             </ButtonPrimary>
           </div>
 
-          <div className={cl.userCard}>
-            <div className={cl.wrapperImg}>
-              <img alt="" src={'^'}></img>
-            </div>
+          {searchedUser ? (
+            <div className={cl.userCard}>
+              <img alt="avatar" src={searchedUser.photoURL}></img>
 
-            <div className={cl.userName}>Misha</div>
-            <ButtonPrimary className={cl.createChatButton}>Create chat</ButtonPrimary>
-          </div>
+              <div className={cl.userName}>{searchedUser.displayName}</div>
+              <ButtonPrimary className={cl.createChatButton}>Create chat</ButtonPrimary>
+            </div>
+          ) : null}
         </form>
       </Modal.Body>
     </Modal>
