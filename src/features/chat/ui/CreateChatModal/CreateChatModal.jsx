@@ -1,8 +1,7 @@
+import { getUserByName } from '@/entities/user/model/getUserByName';
 import { ButtonPrimary } from '@/shared/components/ButtonPrimary/ButtonPrimary';
 import { CustomInput } from '@/shared/components/CustomInput/CustomInput';
 import { Modal } from '@/shared/components/Modal/Modal';
-import { firestore } from '@/shared/firebase/config';
-import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useState } from 'react';
 import cl from './CreateChatModal.module.css';
 
@@ -13,17 +12,7 @@ export const CreateChatModal = ({ isOpen, onClose }) => {
   const onSearchButtonClick = async (e) => {
     e.preventDefault();
     if (inputUserName.trim().length > 0) {
-      const q = query(collection(firestore, 'users'), where('displayName', '>=', inputUserName));
-      const docsSnapshot = await getDocs(q);
-      console.log(docsSnapshot.docs);
-      if (!docsSnapshot.empty) {
-        const userBestMatch = docsSnapshot.docs.find((doc) => doc.data().displayName.toLowerCase().includes(inputUserName.toLocaleLowerCase()));
-        if (userBestMatch) {
-          setSearchedUser(userBestMatch.data());
-        } else {
-          setSearchedUser(null);
-        }
-      }
+      setSearchedUser(await getUserByName(inputUserName));
     }
   };
 
