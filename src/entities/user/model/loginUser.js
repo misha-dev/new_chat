@@ -23,5 +23,8 @@ export const loginUser = async () => {
       online: true,
       friends: [],
     });
+    await setDoc(doc(firestore, 'userchats', user.uid), {
+      chats: [],
+    });
   }
 };
