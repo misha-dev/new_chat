@@ -23,14 +23,8 @@ export const Modal = ({ children, isOpen = false, onClose }) => {
   }
 
   const modal = (
-    <div onClick={onClose} className={cl.modalWrapper}>
-      <div
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-        }}
-        className={cl.modalContent}
-      >
+    <div className={cl.modalWrapper}>
+      <div className={cl.modalContent}>
         {children}
         <button onClick={onClose} className={cl.buttonClose}>
           <ImCross />

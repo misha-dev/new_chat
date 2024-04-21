@@ -3,3 +3,8 @@
   border-radius: 10px;
   color: #fff;
 }
+
+.buttonPrimary:disabled {
+  opacity: 0.7;
+  pointer-events: none;
+}

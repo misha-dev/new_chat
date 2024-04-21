@@ -1,3 +1,4 @@
+import { databases } from '@/shared/constants/database';
 import { auth, firestore } from '@/shared/firebase/config';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
@@ -7,7 +8,7 @@ export const loginUser = async () => {
 
   const { user } = await signInWithPopup(auth, googleProvider);
 
-  const userDocRef = doc(firestore, 'users', user.uid);
+  const userDocRef = doc(firestore, databases.users, user.uid);
   const userDocSnapshot = await getDoc(userDocRef);
 
   if (userDocSnapshot.exists()) {
@@ -22,9 +23,6 @@ export const loginUser = async () => {
       photoURL: user.photoURL,
       online: true,
       friends: [],
-    });
-    await setDoc(doc(firestore, 'userchats', user.uid), {
-      chats: [],
     });
   }
 };

@@ -1,24 +1,14 @@
-import { useGetUserChats } from '@/entities/userchat/model/useGetUserChats';
+import { useGetChatsShort } from '@/entities/chatsShort/model/useGetChatsShort';
 import { CreateChatButton } from '@/features/chat';
 import { LoaderUsers } from '@/shared/components/Loaders/LoaderUsers/LoaderUsers';
 import { SearchInput } from '@/shared/components/SearchInput/SearchInput';
-import { firestore } from '@/shared/firebase/config';
-import { doc, setDoc } from 'firebase/firestore';
 import { useCallback } from 'react';
 import cl from './Users.module.css';
 
 export const Users = ({ userCurrent, setUserActiveDialogue }) => {
-  const [userchats, loading, error] = useGetUserChats(userCurrent);
+  const [chatsShort, loading, error] = useGetChatsShort(userCurrent);
 
-  if (!userchats && !loading && !error) {
-    setDoc(doc(firestore, 'userchats', userCurrent.uid), {
-      chats: [],
-    });
-  }
-
-  const onChangeSearchInputSideEffect = useCallback(() => {
-    console.log('ddd');
-  }, []);
+  const onChangeSearchInputSideEffect = useCallback(() => {}, []);
 
   return (
     <div className={cl.usersWrapper}>
@@ -28,32 +18,32 @@ export const Users = ({ userCurrent, setUserActiveDialogue }) => {
       </div>
       {loading ? (
         <LoaderUsers />
-      ) : userchats.length !== 0 ? (
+      ) : chatsShort.length !== 0 ? (
         <div className={cl.usersList}>
-          {userchats.map((user) => {
+          {chatsShort.map((chat) => {
             return (
-              <label key={user.uid}>
+              <label key={chat.idChatFull}>
                 <input
                   onChange={() => {
-                    setUserActiveDialogue(user);
+                    setUserActiveDialogue(chat);
                   }}
-                  value={user.uid}
+                  value={chat.idChatFull}
                   type="radio"
                   name="userDialogue"
                 />
 
                 <div className={cl.userCard}>
                   <div className={cl.wrapperImg}>
-                    <img alt="" src={user.photoURL}></img>
+                    <img alt="" src={chat.user.photoURL}></img>
                     <div
                       style={{
-                        backgroundColor: user.online ? '#2f70d2' : '#fff',
+                        backgroundColor: chat.user.online ? '#2f70d2' : '#fff',
                       }}
                       className={cl.online}
                     ></div>
                   </div>
 
-                  <div className={cl.userName}>{user.displayName}</div>
+                  <div className={cl.userName}>{chat.user.displayName}</div>
                 </div>
               </label>
             );
