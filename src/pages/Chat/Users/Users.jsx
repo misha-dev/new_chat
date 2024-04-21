@@ -43,7 +43,10 @@ export const Users = ({ userCurrent, setUserActiveDialogue }) => {
                     ></div>
                   </div>
 
-                  <div className={cl.userName}>{chat.user.displayName}</div>
+                  <div className={cl.infoChat}>
+                    <div className={cl.userName}>{chat.user.displayName}</div>
+                    {chat.lastMessage ? <div className={cl.lastMessage}>{chat.lastMessage}</div> : null}
+                  </div>
                 </div>
               </label>
             );
