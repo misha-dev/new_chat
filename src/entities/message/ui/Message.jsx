@@ -3,7 +3,8 @@ import cl from './Message.module.css';
 
 export const Message = ({ userCurrent, userActiveDialogue, message }) => {
   const currentUserMessage = userCurrent.uid === message.senderId;
-  const messageContent = message.text;
+  const messageText = message.text;
+  const messageImg = message.img;
 
   const dateCreation = toDateTime(message.createdAt);
 
@@ -12,16 +13,16 @@ export const Message = ({ userCurrent, userActiveDialogue, message }) => {
       {currentUserMessage ? (
         <>
           <div className={`${cl.message} ${cl.messageRight}`}>
-            {messageContent}
+            {messageText ? messageText : <img className={cl.messageImg} src={messageImg} alt="photo" />}
             <div className={`${cl.dateCreation} ${cl.dateCreationRight}`}>{dateCreation}</div>
           </div>
-          <img style={{ marginLeft: '5px' }} src={userCurrent.photoURL} alt="avatar" />
+          <img className={cl.avatar} style={{ marginLeft: '5px' }} src={userCurrent.photoURL} alt="avatar" />
         </>
       ) : (
         <>
-          <img style={{ marginRight: '5px' }} src={userActiveDialogue.user.photoURL} alt="avatar" />
+          <img className={cl.avatar} style={{ marginRight: '5px' }} src={userActiveDialogue.user.photoURL} alt="avatar" />
           <div className={`${cl.message} ${cl.messageLeft}`}>
-            {messageContent}
+            {messageText ? messageText : <img className={cl.messageImg} src={messageImg} alt="photo" />}
             <div className={`${cl.dateCreation} ${cl.dateCreationLeft}`}>{dateCreation}</div>
           </div>
         </>
