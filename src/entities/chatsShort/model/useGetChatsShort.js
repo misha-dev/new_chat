@@ -1,9 +1,10 @@
 import { databases } from '@/shared/constants/database';
 import { firestore } from '@/shared/firebase/config';
 import { collection, doc, getDoc, onSnapshot, query, where } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const useGetChatsShort = (userCurrent) => {
+  const firstLoad = useRef(true);
   const [chats, setChats] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,7 +14,10 @@ export const useGetChatsShort = (userCurrent) => {
       q,
       async (res) => {
         try {
-          setIsLoading(true);
+          if (firstLoad.current) {
+            setIsLoading(true);
+            firstLoad.current = false;
+          }
           const items = res.docs;
 
           const promises = items.map(async (item) => {

@@ -10,8 +10,6 @@ export const Users = ({ userCurrent, userActiveDialogue, setUserActiveDialogue }
 
   const onChangeSearchInputSideEffect = useCallback(() => {}, []);
 
-  console.log(userActiveDialogue);
-
   return (
     <div className={cl.usersWrapper}>
       <div className={cl.chatOptions}>
