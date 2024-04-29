@@ -5,10 +5,12 @@ import { SearchInput } from '@/shared/components/SearchInput/SearchInput';
 import { useCallback } from 'react';
 import cl from './Users.module.css';
 
-export const Users = ({ userCurrent, setUserActiveDialogue }) => {
+export const Users = ({ userCurrent, userActiveDialogue, setUserActiveDialogue }) => {
   const [chatsShort, loading, error] = useGetChatsShort(userCurrent);
 
   const onChangeSearchInputSideEffect = useCallback(() => {}, []);
+
+  console.log(userActiveDialogue);
 
   return (
     <div className={cl.usersWrapper}>
@@ -27,9 +29,9 @@ export const Users = ({ userCurrent, setUserActiveDialogue }) => {
                   onChange={() => {
                     setUserActiveDialogue(chat);
                   }}
-                  value={chat.idChatFull}
                   type="radio"
                   name="userDialogue"
+                  checked={userActiveDialogue?.id === chat.id}
                 />
 
                 <div className={cl.userCard}>

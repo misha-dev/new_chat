@@ -12,7 +12,7 @@ export const Chat = () => {
 
   return (
     <div className={cl.chatWrapper}>
-      <Users setUserActiveDialogue={setUserActiveDialogue} userCurrent={userCurrent} />
+      <Users setUserActiveDialogue={setUserActiveDialogue} userActiveDialogue={userActiveDialogue} userCurrent={userCurrent} />
       <div className={cl.dialogueArea}>{userActiveDialogue !== null ? <Dialogue userCurrent={userCurrent} userActiveDialogue={userActiveDialogue} /> : <BlankDialogue />}</div>
     </div>
   );
