@@ -19,7 +19,7 @@ export const Message = ({ userCurrent, userActiveDialogue, message }) => {
         </>
       ) : (
         <>
-          <img style={{ marginRight: '5px' }} src={userActiveDialogue.photoURL} alt="avatar" />
+          <img style={{ marginRight: '5px' }} src={userActiveDialogue.user.photoURL} alt="avatar" />
           <div className={`${cl.message} ${cl.messageLeft}`}>
             {messageContent}
             <div className={`${cl.dateCreation} ${cl.dateCreationLeft}`}>{dateCreation}</div>

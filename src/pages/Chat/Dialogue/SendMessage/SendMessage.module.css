@@ -16,7 +16,7 @@
 
 .emojiPicker {
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
   transform: translateY(-106%);
 }
@@ -39,6 +39,11 @@
   background-color: rgb(56 145 252 / 30%);
 }
 
+.sendingMessage {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .sendMessage {
   display: flex;
   align-items: center;
@@ -48,7 +53,6 @@
   width: 30px;
   height: 30px;
   background-color: #3891fc;
-  cursor: pointer;
 }
 
 .sendIcon {

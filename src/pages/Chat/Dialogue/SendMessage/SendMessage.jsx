@@ -12,6 +12,7 @@ import cl from './SendMessage.module.css';
 
 export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
   const [message, setMessage] = useState('');
+  const [sendingMessage, setSendingMessage] = useState(false);
   const [isOpenEmojiPicker, setIsOpenEmojiPicker] = useState(false);
   const inputMessageArea = useRef();
   const [currentCursorPosition, setCurrentCursorPosition] = useState(null);
@@ -35,24 +36,30 @@ export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
       return;
     }
     const currentTime = Date.now();
+    if (!sendingMessage) {
+      try {
+        setSendingMessage(true);
+        const updateChatsFull = updateDoc(doc(firestore, databases.chatsFull, userActiveDialogue.idChatFull), {
+          messages: arrayUnion({
+            senderId: userCurrent.uid,
+            text: message,
+            createdAt: currentTime,
+          }),
+        });
+        const updateChatsShort = updateDoc(doc(firestore, databases.chatsShort, userActiveDialogue.id), {
+          lastMessage: message,
+          updatedAt: currentTime,
+        });
 
-    const updateChatsFull = updateDoc(doc(firestore, databases.chatsFull, userActiveDialogue.idChatFull), {
-      messages: arrayUnion({
-        senderId: userCurrent.uid,
-        text: message,
-        createdAt: currentTime,
-      }),
-    });
-    const updateChatsShort = updateDoc(doc(firestore, databases.chatsShort, userActiveDialogue.id), {
-      lastMessage: message,
-      updatedAt: currentTime,
-    });
+        await Promise.all([updateChatsFull, updateChatsShort]);
+      } finally {
+        setSendingMessage(false);
+      }
 
-    await Promise.all([updateChatsFull, updateChatsShort]);
+      setMessage('');
 
-    setMessage('');
-
-    inputMessageArea?.current?.focus();
+      inputMessageArea?.current?.focus();
+    }
   };
   const handleKeyEnter = (e) => {
     if (e.key === 'Enter') {
@@ -88,13 +95,14 @@ export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
           setMessage(e.target.value);
         }}
         onKeyDown={handleKeyEnter}
-        className={cl.message}
+        disabled={sendingMessage}
+        className={`${cl.message} ${sendingMessage ? cl.sendingMessage : ''}`}
         placeholder="Enter a message"
       ></textarea>
 
-      <div onClick={sendMessage} className={cl.sendMessage}>
+      <button onClick={sendMessage} className={`${cl.sendMessage}  ${sendingMessage ? cl.sendingMessage : ''}`}>
         <IoMdSend className={cl.sendIcon} />
-      </div>
+      </button>
     </div>
   );
 };
