@@ -21,6 +21,14 @@
   transform: translateY(-106%);
 }
 
+.emojiContainer button {
+  background-color: transparent;
+}
+
+.emojiContainer.sendingMessage button {
+  cursor: not-allowed;
+}
+
 .message {
   outline: none;
   border: 1px solid rgb(56 145 252 / 30%);

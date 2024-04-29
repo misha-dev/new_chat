@@ -76,12 +76,14 @@ export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
 
   return (
     <div className={cl.sendMessageWrapper}>
-      <div className={cl.emojiContainer}>
+      <div className={`${cl.emojiContainer} ${sendingMessage ? cl.sendingMessage : ''}`}>
         <div className={cl.emojiPicker}>{isOpenEmojiPicker ? <Picker theme="light" data={data} onEmojiSelect={onEmojiClickEvent} /> : null}</div>
         <button
           type="button"
           onClick={() => {
-            setIsOpenEmojiPicker(!isOpenEmojiPicker);
+            if (!sendingMessage) {
+              setIsOpenEmojiPicker(!isOpenEmojiPicker);
+            }
           }}
         >
           <MdEmojiEmotions fill="#2F70D2" className={cl.emojiPickerButton} />
