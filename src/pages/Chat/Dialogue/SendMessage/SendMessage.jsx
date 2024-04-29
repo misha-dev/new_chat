@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import { IoMdSend } from 'react-icons/io';
+import { IoIosAttach, IoMdSend } from 'react-icons/io';
 
 import { databases } from '@/shared/constants/database';
 import { firestore } from '@/shared/firebase/config';
+import { upload } from '@/shared/firebase/upload';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
@@ -43,6 +44,7 @@ export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
           messages: arrayUnion({
             senderId: userCurrent.uid,
             text: message,
+            img: null,
             createdAt: currentTime,
           }),
         });
@@ -68,6 +70,35 @@ export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
     }
   };
 
+  const handleImg = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imgUrl = await upload(file);
+      const currentTime = Date.now();
+      if (!sendingMessage) {
+        try {
+          setSendingMessage(true);
+          const updateChatsFull = updateDoc(doc(firestore, databases.chatsFull, userActiveDialogue.idChatFull), {
+            messages: arrayUnion({
+              senderId: userCurrent.uid,
+              text: null,
+              img: imgUrl,
+              createdAt: currentTime,
+            }),
+          });
+          const updateChatsShort = updateDoc(doc(firestore, databases.chatsShort, userActiveDialogue.id), {
+            lastMessage: '[image]',
+            updatedAt: currentTime,
+          });
+
+          await Promise.all([updateChatsFull, updateChatsShort]);
+        } finally {
+          setSendingMessage(false);
+        }
+      }
+    }
+  };
+
   useEffect(() => {
     if (!isMobile) {
       inputMessageArea?.current?.focus();
@@ -89,6 +120,10 @@ export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
           <MdEmojiEmotions fill="#2F70D2" className={cl.emojiPickerButton} />
         </button>
       </div>
+      <label>
+        <IoIosAttach fill="#2F70D2" className={`${cl.imgPicker} ${sendingMessage ? cl.sendingMessage : ''}`} />
+        <input disabled={sendingMessage} onChange={handleImg} type="file" accept="image/png, image/jpeg" style={{ display: 'none' }} />
+      </label>
       <textarea
         ref={inputMessageArea}
         autoComplete="off"

@@ -29,6 +29,11 @@
   cursor: not-allowed;
 }
 
+.imgPicker {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
 .message {
   outline: none;
   border: 1px solid rgb(56 145 252 / 30%);
