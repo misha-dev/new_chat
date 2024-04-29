@@ -13,7 +13,13 @@ export const Dialogue = ({ userCurrent, userActiveDialogue }) => {
   const endRef = useRef();
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const timeout = setTimeout(() => {
+      endRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 300);
+
+    return () => {
+      clearTimeout(timeout);
+    };
   });
 
   return (
