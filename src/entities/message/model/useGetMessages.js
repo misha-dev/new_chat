@@ -1,10 +1,17 @@
+import { databases } from '@/shared/constants/database';
 import { firestore } from '@/shared/firebase/config';
-import { hashDialogueId } from '@/shared/utils/hashDialogueId';
-import { collection, orderBy, query, where } from 'firebase/firestore';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { doc } from 'firebase/firestore';
+import { useDocument } from 'react-firebase-hooks/firestore';
 
-export const useGetMessages = (userCurrent, userDialogue) => {
-  const hashId = hashDialogueId(userCurrent.uid, userDialogue.uid);
-  const q = query(collection(firestore, 'messages'), where('users', 'array-contains', userCurrent.uid), where('access', '==', hashId), orderBy('createdAt'));
-  return useCollectionData(q);
+export const useGetMessages = (userDialogue) => {
+  const [chatFull, loading] = useDocument(doc(firestore, databases.chatsFull, userDialogue.idChatFull));
+  const chatFullData = chatFull?.data();
+
+  let messages = [];
+
+  if (!loading && chatFullData) {
+    messages = chatFullData.messages;
+  }
+
+  return [messages, loading];
 };

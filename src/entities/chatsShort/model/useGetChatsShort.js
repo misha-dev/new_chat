@@ -23,8 +23,7 @@ export const useGetChatsShort = (userCurrent) => {
             const userDocSnap = await getDoc(userDocRef);
 
             const user = userDocSnap.data();
-            console.log({ ...itemData, user });
-            return { ...itemData, user };
+            return { ...itemData, id: item.id, user };
           });
 
           const chatData = await Promise.all(promises);

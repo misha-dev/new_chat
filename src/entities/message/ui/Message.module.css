@@ -3,6 +3,7 @@
   align-items: center;
   padding: 12px;
   color: white;
+  word-wrap: break-word;
 }
 
 .messageWrapper img {
@@ -29,7 +30,7 @@
   border-radius: 20px;
   padding: 10px 15px;
   max-width: 80%;
-  line-height: 1.15rem;
+  line-height: 1.3rem;
 }
 
 .messageRight {

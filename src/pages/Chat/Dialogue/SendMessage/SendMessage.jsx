@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { IoMdSend } from 'react-icons/io';
 
+import { databases } from '@/shared/constants/database';
 import { firestore } from '@/shared/firebase/config';
-import { hashDialogueId } from '@/shared/utils/hashDialogueId';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
-import { addDoc, collection } from 'firebase/firestore';
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { MdEmojiEmotions } from 'react-icons/md';
 import cl from './SendMessage.module.css';
 
@@ -34,21 +34,25 @@ export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
       setMessage('');
       return;
     }
+    const currentTime = Date.now();
 
-    await addDoc(collection(firestore, 'messages'), {
-      access: hashDialogueId(userCurrent.uid, userActiveDialogue.uid),
-      uid: userCurrent.uid,
-      toUser: userActiveDialogue.uid,
-      users: [userCurrent.uid, userActiveDialogue.uid],
-      displayName: userCurrent.displayName,
-      photoURL: userCurrent.photoURL,
-      message: message.trim(),
-      createdAt: new Date(),
+    const updateChatsFull = updateDoc(doc(firestore, databases.chatsFull, userActiveDialogue.idChatFull), {
+      messages: arrayUnion({
+        senderId: userCurrent.uid,
+        text: message,
+        createdAt: currentTime,
+      }),
+    });
+    const updateChatsShort = updateDoc(doc(firestore, databases.chatsShort, userActiveDialogue.id), {
+      lastMessage: message,
+      updatedAt: currentTime,
     });
 
-    inputMessageArea?.current?.focus();
+    await Promise.all([updateChatsFull, updateChatsShort]);
 
     setMessage('');
+
+    inputMessageArea?.current?.focus();
   };
   const handleKeyEnter = (e) => {
     if (e.key === 'Enter') {

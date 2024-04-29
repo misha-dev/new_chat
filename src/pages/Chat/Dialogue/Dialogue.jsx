@@ -8,21 +8,18 @@ import { EmptyDialogue } from './EmptyDialogue/EmptyDialogue';
 import { SendMessage } from './SendMessage/SendMessage';
 
 export const Dialogue = ({ userCurrent, userActiveDialogue }) => {
-  const [messages, messagesLoading] = useGetMessages(userCurrent, userActiveDialogue);
-  console.log(messages);
+  const [messages, messagesLoading] = useGetMessages(userActiveDialogue);
 
   const endRef = useRef();
 
   useEffect(() => {
-    if (!messagesLoading) {
-      endRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [messagesLoading]);
+    endRef.current?.scrollIntoView({ behavior: 'smooth' });
+  });
 
   return (
     <div className={cl.dialogueWrapper}>
       <div className={cl.messagesWrapper}>
-        <div className={cl.companionName}>{userActiveDialogue.displayName}</div>
+        <div className={cl.companionName}>{userActiveDialogue.user.displayName}</div>
         {messagesLoading ? (
           <LoaderMessages />
         ) : messages.length === 0 ? (
@@ -30,7 +27,7 @@ export const Dialogue = ({ userCurrent, userActiveDialogue }) => {
         ) : (
           <div className={cl.messageWrapperForScroll}>
             {messages.map((message, id) => {
-              return <Message key={id} message={message} uid={message.uid} userCurrent={userCurrent} userActiveDialogue={userActiveDialogue} />;
+              return <Message key={id} message={message} userCurrent={userCurrent} userActiveDialogue={userActiveDialogue} />;
             })}
             <div ref={endRef}></div>
           </div>

@@ -1,11 +1,11 @@
 import { toDateTime } from '@/shared/utils/toDateTime';
 import cl from './Message.module.css';
 
-export const Message = ({ userCurrent, uid, userActiveDialogue, message }) => {
-  const currentUserMessage = userCurrent.uid === uid;
-  const messageContent = message.message;
+export const Message = ({ userCurrent, userActiveDialogue, message }) => {
+  const currentUserMessage = userCurrent.uid === message.senderId;
+  const messageContent = message.text;
 
-  const dateCreation = toDateTime(message.createdAt.toDate());
+  const dateCreation = toDateTime(message.createdAt);
 
   return (
     <div className={cl.messageWrapper} style={{ justifyContent: currentUserMessage ? 'flex-end' : 'flex-start' }}>

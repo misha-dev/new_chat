@@ -10,5 +10,6 @@ export const toDateTime = (date) => {
   if (!date) {
     return '';
   }
+  date = new Date(date);
   return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${toTwoLetters(date.getHours())}:${toTwoLetters(date.getMinutes())}`;
 };
