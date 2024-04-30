@@ -9,6 +9,7 @@ import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { MdEmojiEmotions } from 'react-icons/md';
+import { toast } from 'react-toastify';
 import cl from './SendMessage.module.css';
 
 export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
@@ -54,6 +55,8 @@ export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
         });
 
         await Promise.all([updateChatsFull, updateChatsShort]);
+      } catch {
+        toast.error('Error while sending!');
       } finally {
         setSendingMessage(false);
       }
@@ -92,6 +95,8 @@ export const SendMessage = ({ userCurrent, userActiveDialogue }) => {
           });
 
           await Promise.all([updateChatsFull, updateChatsShort]);
+        } catch {
+          toast.error('Error while sending!');
         } finally {
           setSendingMessage(false);
         }
