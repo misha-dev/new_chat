@@ -121,7 +121,11 @@ input[type='radio']:checked + div {
   }
 
   .userCard {
-    padding: 5px 5px 5px 10px;
+    padding: 5px;
+    justify-content: center;
+  }
+  .wrapperImg {
+    margin-right: 0;
   }
 
   .wrapperImg img {
@@ -131,6 +135,17 @@ input[type='radio']:checked + div {
 
   .userName {
     display: none;
+  }
+
+  .search {
+    display: none;
+  }
+  .infoChat {
+    width: auto;
+  }
+
+  .chatOptions {
+    justify-content: center;
   }
 }
 
