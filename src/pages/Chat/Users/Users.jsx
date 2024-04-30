@@ -11,6 +11,8 @@ export const Users = ({ userCurrent, userActiveDialogue, setUserActiveDialogue }
 
   const onChangeSearchInputSideEffect = useCallback((text) => setSearchedChat(text), []);
 
+  const filteredChats = chatsShort.filter((chat) => chat.user.displayName.toLowerCase().includes(searchedChat.toLowerCase()));
+
   return (
     <div className={cl.usersWrapper}>
       <div className={cl.chatOptions}>
@@ -19,43 +21,39 @@ export const Users = ({ userCurrent, userActiveDialogue, setUserActiveDialogue }
       </div>
       {loading ? (
         <LoaderUsers />
-      ) : chatsShort.length !== 0 ? (
+      ) : filteredChats.length !== 0 ? (
         <div className={cl.usersList}>
-          {chatsShort
-            .filter((chat) => {
-              return chat.user.displayName.toLowerCase().includes(searchedChat.toLowerCase());
-            })
-            .map((chat) => {
-              return (
-                <label key={chat.idChatFull}>
-                  <input
-                    onChange={() => {
-                      setUserActiveDialogue(chat);
-                    }}
-                    type="radio"
-                    name="userDialogue"
-                    checked={userActiveDialogue?.id === chat.id}
-                  />
+          {filteredChats.map((chat) => {
+            return (
+              <label key={chat.idChatFull}>
+                <input
+                  onChange={() => {
+                    setUserActiveDialogue(chat);
+                  }}
+                  type="radio"
+                  name="userDialogue"
+                  checked={userActiveDialogue?.id === chat.id}
+                />
 
-                  <div className={cl.userCard}>
-                    <div className={cl.wrapperImg}>
-                      <img alt="" src={chat.user.photoURL}></img>
-                      <div
-                        style={{
-                          backgroundColor: chat.user.online ? '#2f70d2' : '#fff',
-                        }}
-                        className={cl.online}
-                      ></div>
-                    </div>
-
-                    <div className={cl.infoChat}>
-                      <div className={cl.userName}>{chat.user.displayName}</div>
-                      {chat.lastMessage ? <div className={cl.lastMessage}>{chat.lastMessage}</div> : null}
-                    </div>
+                <div className={cl.userCard}>
+                  <div className={cl.wrapperImg}>
+                    <img alt="" src={chat.user.photoURL}></img>
+                    <div
+                      style={{
+                        backgroundColor: chat.user.online ? '#2f70d2' : '#fff',
+                      }}
+                      className={cl.online}
+                    ></div>
                   </div>
-                </label>
-              );
-            })}
+
+                  <div className={cl.infoChat}>
+                    <div className={cl.userName}>{chat.user.displayName}</div>
+                    {chat.lastMessage ? <div className={cl.lastMessage}>{chat.lastMessage}</div> : null}
+                  </div>
+                </div>
+              </label>
+            );
+          })}
         </div>
       ) : (
         <p className={cl.noChats}>No chats!</p>
