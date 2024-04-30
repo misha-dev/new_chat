@@ -101,16 +101,6 @@ input[type='radio']:checked + div {
   background-color: #2f70d2;
 }
 
-.online {
-  position: absolute;
-  left: 60%;
-  top: 68%;
-  border: 0.5px solid #00399b;
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
-  transition: background-color 0.2s linear;
-}
 
 @media (max-width: 1350px) {
   .usersWrapper {
@@ -156,9 +146,4 @@ input[type='radio']:checked + div {
   }
 }
 
-@media (max-width: 500px) {
-  .online {
-    width: 7px;
-    height: 7px;
-  }
-}
+

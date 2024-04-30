@@ -38,12 +38,6 @@ export const Users = ({ userCurrent, userActiveDialogue, setUserActiveDialogue }
                 <div className={cl.userCard}>
                   <div className={cl.wrapperImg}>
                     <img alt="" src={chat.user.photoURL}></img>
-                    <div
-                      style={{
-                        backgroundColor: chat.user.online ? '#2f70d2' : '#fff',
-                      }}
-                      className={cl.online}
-                    ></div>
                   </div>
 
                   <div className={cl.infoChat}>

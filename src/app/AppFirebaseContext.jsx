@@ -1,4 +1,3 @@
-import { setUserOnline } from '@/entities/user/model/setUserOnline';
 import { auth } from '@/shared/firebase/config';
 import { FirebaseContext } from '@/shared/firebase/context';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -17,20 +16,6 @@ export const AppFirebaseContext = ({ children }) => {
       unsubscribe();
     };
   }, []);
-
-  useEffect(() => {
-    const setUserOfflineOnBeforeUnload = () => {
-      if (currentUser) {
-        setUserOnline(currentUser.uid, false);
-      }
-    };
-
-    window.addEventListener('beforeunload', setUserOfflineOnBeforeUnload);
-
-    return () => {
-      window.removeEventListener('beforeunload', setUserOfflineOnBeforeUnload);
-    };
-  }, [currentUser]);
 
   return <FirebaseContext.Provider value={{ logged }}>{children}</FirebaseContext.Provider>;
 };

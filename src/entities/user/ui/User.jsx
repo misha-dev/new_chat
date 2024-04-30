@@ -31,7 +31,7 @@ export const User = ({ user }) => {
       <img alt="user" src={user.photoURL} />
 
       <div className={userOptionsClasses.join(' ')}>
-        <div className={cl.option} onClick={signOut}>
+        <div className={cl.option} onClick={() => signOut(user)}>
           Logout <IoIosLogOut style={{ marginLeft: '5px' }} />
         </div>
       </div>
