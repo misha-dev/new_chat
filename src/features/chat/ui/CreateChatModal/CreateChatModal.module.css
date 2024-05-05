@@ -40,6 +40,13 @@
   background: url('/images/userPreview.png') no-repeat center center/cover;
 }
 
+
+.userNotFound {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.3rem;
+}
+
 .userName {
   font-size: 1.3rem;
 }

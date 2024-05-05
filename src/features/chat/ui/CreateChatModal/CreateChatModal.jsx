@@ -12,12 +12,14 @@ import cl from './CreateChatModal.module.css';
 export const CreateChatModal = ({ isOpen, onClose }) => {
   const [inputUserName, setInputUserName] = useState('');
   const [searchedUser, setSearchedUser] = useState(null);
+  const [isFirstSearch, setIsFirstSearch] = useState(false);
   const [loadingCreatingChat, setLoadingCreatingChat] = useState(false);
   const currentUser = useAuth();
 
   const onSearchButtonClick = async (e) => {
     e.preventDefault();
     if (inputUserName.trim().length > 0) {
+      setIsFirstSearch(true);
       setSearchedUser(await getUserByName(inputUserName, currentUser));
     }
   };
@@ -80,6 +82,8 @@ export const CreateChatModal = ({ isOpen, onClose }) => {
                 Create chat
               </ButtonPrimary>
             </div>
+          ) : isFirstSearch ? (
+            <p className={cl.userNotFound}>User not found!</p>
           ) : null}
         </form>
       </Modal.Body>
