@@ -4,12 +4,10 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 
 export const AppFirebaseContext = ({ children }) => {
-  const [logged, setLogged] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [checkedAuth, setCheckedAuth] = useState(false);
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-      setLogged(true);
+    const unsubscribe = onAuthStateChanged(auth, () => {
+      setCheckedAuth(true);
     });
 
     return () => {
@@ -17,5 +15,5 @@ export const AppFirebaseContext = ({ children }) => {
     };
   }, []);
 
-  return <FirebaseContext.Provider value={{ logged }}>{children}</FirebaseContext.Provider>;
+  return <FirebaseContext.Provider value={{ checkedAuth }}>{children}</FirebaseContext.Provider>;
 };

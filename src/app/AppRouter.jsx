@@ -10,12 +10,12 @@ import { Layout } from '@/widgets/Layout/Layout';
 import './App.css';
 
 export const AppRouter = () => {
-  const { logged } = useFirebaseContext();
+  const { checkedAuth } = useFirebaseContext();
   const user = useAuth();
 
   return (
     <main>
-      {logged ? (
+      {checkedAuth ? (
         <Routes>
           <Route path="/chatonline" element={<Layout />}>
             {user ? <Route index element={<Chat />} /> : <Route index element={<Auth />} />}
