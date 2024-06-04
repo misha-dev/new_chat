@@ -14,6 +14,15 @@ export const Dialogue = ({ userCurrent, userActiveDialogue }) => {
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
+
+    // for long loading imgs to scroll correctly
+    const timeout = setTimeout(() => {
+      endRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 300);
+
+    return () => {
+      clearTimeout(timeout);
+    };
   });
 
   return (
