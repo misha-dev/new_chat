@@ -9,7 +9,7 @@ export const Auth = () => {
     try {
       await loginUser();
     } catch {
-      toast.error('Error while logging!');
+      toast.error('Error while login!');
     }
   };
   return (
