@@ -16,6 +16,14 @@ export const CreateChatModal = ({ isOpen, onClose }) => {
   const [loadingCreatingChat, setLoadingCreatingChat] = useState(false);
   const currentUser = useAuth();
 
+  const onCloseModal = () => {
+    onClose();
+    setInputUserName('');
+    setSearchedUser(null);
+    setLoadingCreatingChat(false);
+    setIsFirstSearch(false);
+  };
+
   const onSearchButtonClick = async (e) => {
     e.preventDefault();
     if (inputUserName.trim().length > 0) {
@@ -49,9 +57,7 @@ export const CreateChatModal = ({ isOpen, onClose }) => {
         lastMessage: '',
         participants: [currentUser.uid, searchedUser.uid],
       });
-      onClose();
-      setSearchedUser(null);
-      setInputUserName('');
+      onCloseModal();
     } catch (e) {
       console.log(e);
     } finally {
@@ -60,7 +66,7 @@ export const CreateChatModal = ({ isOpen, onClose }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onCloseModal}>
       <Modal.Header>
         <h2 className={cl.header}>Creating chat</h2>
       </Modal.Header>
